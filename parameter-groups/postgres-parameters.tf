@@ -1,1 +1,0 @@
-# PostgreSQL parameter group configuration
