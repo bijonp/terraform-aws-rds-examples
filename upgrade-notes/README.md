@@ -101,3 +101,51 @@ During in-place upgrades involving read replicas, always verify that
 default parameter groups may be associated after version upgrades.
 
 ---
+## Scenario 4: pgAdmin Authentication Failure After PostgreSQL Upgrade
+
+### Context
+The PostgreSQL database had already been upgraded from **13.20 to 15.17**.
+Database administration was performed using **pgAdmin installed on an AWS
+EC2 instance running Ubuntu OS**.
+
+To ensure compatibility with PostgreSQL 15.17, **pgAdmin was upgraded from
+version 6.21 to 9.12**.
+
+### Issue Observed
+After upgrading pgAdmin:
+- Existing pgAdmin users were **not migrated**
+- None of the pgAdmin users were able to log in using existing credentials
+- Database connections via pgAdmin consistently failed
+
+### Root Cause Analysis
+During the PostgreSQL major version upgrade, the database parameter
+`password_encryption` was set to the default value introduced in
+PostgreSQL 15:
+
+```text
+password_encryption = scram-sha-256
+
+However:
+The existing pgAdmin users had been created using MD5-based password
+authentication
+The encryption mismatch caused pgAdmin authentication failures
+
+### Resolution
+
+Updated the PostgreSQL parameter group to allow MD5-based authentication:
+```text
+password_encryption = md5
+
+- Applied the updated parameter group
+- Restarted the PostgreSQL database to ensure the change took effect
+
+### Outcome
+
+- pgAdmin users were able to log in successfully
+- Database connections via pgAdmin were restored
+- No impact observed on application-level authentication
+
+### Key Takeaway
+PostgreSQL major version upgrades can introduce default authentication and
+encryption changes. Always review password_encryption settings and client
+tool compatibility (such as pgAdmin) to prevent post-upgrade login failures.
