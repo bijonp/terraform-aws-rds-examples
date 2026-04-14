@@ -1,4 +1,4 @@
-# Upgrade Notes
+# Real Life Scenarios README
 
 Operational notes and real-world observations from AWS RDS PostgreSQL
 upgrade activities performed in production environments.
