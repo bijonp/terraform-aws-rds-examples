@@ -122,7 +122,6 @@ During the PostgreSQL major version upgrade, the database parameter
 `password_encryption` was set to the default value introduced in
 PostgreSQL 15:
 
-```text
 password_encryption = scram-sha-256
 
 However:
@@ -133,7 +132,7 @@ The encryption mismatch caused pgAdmin authentication failures
 ### Resolution
 
 Updated the PostgreSQL parameter group to allow MD5-based authentication:
-```text
+
 password_encryption = md5
 
 - Applied the updated parameter group
