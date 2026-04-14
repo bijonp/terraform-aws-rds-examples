@@ -1,16 +1,17 @@
-# Terraform AWS RDS Examples
+# Terraform AWS Aurora & RDS PostgreSQL
 
 Real‑world Terraform examples for managing AWS RDS PostgreSQL
 with production‑grade configurations.
 
 ## ✅ What This Repo Covers
-- RDS PostgreSQL provisioning using Terraform
+- Aurora & RDS PostgreSQL provisioning using Terraform
 - Parameter group configuration & tuning
 - Major version upgrade planning notes
 - Secure & cost‑optimized setups
 
 ## 🛠 Technologies
 - AWS RDS
+- Aurora 
 - PostgreSQL
 - Terraform
 
